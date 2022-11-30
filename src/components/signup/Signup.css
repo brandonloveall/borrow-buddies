@@ -1,0 +1,58 @@
+.Signup {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+}
+
+.Signup .background {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.Signup .signupHolder {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100vw;
+    max-height: 100vh;
+    height: 300px;
+    width: 250px;
+}
+
+.Signup form {
+    height: 100%;
+    width: 100%;
+    background-color: #DAD7CD;
+    padding: 5px;
+    z-index: 1;
+    border-style: solid;
+    border-color: #344E41;
+    border-width: 2px;
+    display: flex;
+    flex-flow: column nowrap;
+    min-width: 100px;
+    justify-content: space-between;
+}
+
+.Signup h3 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+}
+
+.Signup input:focus {
+    outline: none;
+}
+
+.Signup input {
+    border-style: solid;
+    border-color: #344E41;
+    height: 10%;
+}

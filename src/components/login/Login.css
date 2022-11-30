@@ -1,0 +1,59 @@
+.Login {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+}
+
+.Login .background {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.Login .loginHolder {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100vw;
+    max-height: 100vh;
+    height: 250px;
+    width: 250px;
+}
+
+.Login form {
+    height: 100%;
+    width: 100%;
+    background-color: #DAD7CD;
+    padding: 5px;
+    z-index: 1;
+    border-style: solid;
+    border-color: #344E41;
+    border-width: 2px;
+    display: flex;
+    flex-flow: column nowrap;
+    min-width: 100px;
+    justify-content: space-between;
+}
+
+.Login h3 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.Login input:focus {
+    outline: none;
+}
+
+.Login input {
+    border-style: solid;
+    border-color: #344E41;
+    height: 12%;
+}
