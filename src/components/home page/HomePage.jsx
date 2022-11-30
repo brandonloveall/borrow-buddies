@@ -41,7 +41,7 @@ function HomePage() {
                 <div className="leftarrow"><img src={arrow} alt="" onClick={() => {prevImg()}}/></div>
                 
                 <div className="imageholder">
-                    <Link to={termToSearch(games[currentGame].name)} className="imglink">
+                    <Link to={`/c/${termToSearch(games[currentGame].name)}`} className="imglink">
                         <img src={games[currentGame].img} alt="" /> 
                         <div className="imgdescription">
                             <p>{games[currentGame].name}</p>

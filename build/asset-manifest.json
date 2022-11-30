@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b01283e5.css",
+    "main.js": "/static/js/main.6346e0d3.js",
+    "static/media/gow.jpg": "/static/media/gow.9d3bebc2aee6c8502a88.jpg",
+    "static/media/eldenring.jpg": "/static/media/eldenring.7b669502012fd25bff7d.jpg",
+    "static/media/testgame.jpg": "/static/media/testgame.e302690e32870c025c5a.jpg",
+    "static/media/cart.svg": "/static/media/cart.8b70f0673629a1f7c856a66cdb2cf6db.svg",
+    "static/media/search.svg": "/static/media/search.22075a79917f4fa105aaeab98e950815.svg",
+    "index.html": "/index.html",
+    "static/media/imgarrow.svg": "/static/media/imgarrow.950b5f9d5665e8b6596345dfb48d4f9a.svg",
+    "main.b01283e5.css.map": "/static/css/main.b01283e5.css.map",
+    "main.6346e0d3.js.map": "/static/js/main.6346e0d3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b01283e5.css",
+    "static/js/main.6346e0d3.js"
+  ]
+}

@@ -32,8 +32,8 @@ function App() {
           {(() => {return id ? <div className='myaccount'><button className='accountbutton' onClick={() => {accountDropdown === "none" ? setAccountDropdown("flex") : setAccountDropdown("none")}}><p>My Account</p></button>
             <div className='accountdropdownholder'>
               <div className='accountdropdown' style={{display: accountDropdown}}>
-                <Link to={`/account/${id}`} className='myaccount'><p>View Profile</p></Link>
-                <Link to="/settings" className='settings'><p>Settings</p></Link>
+                <Link to={`/c/account/${id}`} className='myaccount'><p>View Profile</p></Link>
+                <Link to="/c/settings" className='settings'><p>Settings</p></Link>
                 <button className='signout' onClick={() => {dispatch(logout())}}><p>Sign Out</p></button>
               </div>
             </div>  
@@ -44,7 +44,8 @@ function App() {
 
           {(() => {return id === null ? <button className='accountbutton' onClick={() => {dispatch(toggleSignup())}}><p>Sign Up</p></button> : null})()}
           
-          <Link to="/mycart" className='cart'><img src={cart} alt="" /></Link>
+          {(() => {return id ? <Link to="/c/mycart" className='cart'><img src={cart} alt="" /></Link> : null})()}
+          
         </div>
       </header>
 
@@ -53,18 +54,18 @@ function App() {
         <div className='searchholder'>
           <div className='searchbarholder'>
             <input type="text" className='searchBar' placeholder='Search for a game...' onChange={(e) => {setSearchTerm(e.target.value); console.log(searchTerm)}}/>
-            <Link className='searchbutton' to={`${termToSearch(searchTerm)}`}><img src={search} alt="" /></Link>
+            <Link className='searchbutton' to={`/c/${termToSearch(searchTerm)}`}><img src={search} alt="" /></Link>
           </div>
 
           <div className='genreHolder'>
-            <Link to="/search?genre=action" className='link'><p className='firstgenre'>Action</p></Link>
-            <Link to="/search?genre=adventure" className='link'><p>Adventure</p></Link>
-            <Link to="/search?genre=platformer" className='link'><p>Platformer</p></Link>
-            <Link to="/search?genre=fps" className='link'><p>FPS</p></Link>
-            <Link to="/search?genre=fighting" className='link'><p>Fighting</p></Link>
-            <Link to="/search?genre=stealth" className='link'><p>Stealth</p></Link>
-            <Link to="/search?genre=survival" className='link'><p>Survival</p></Link>
-            <Link to="/search?genre=horror" className='link'><p className='lastgenre'>Horror</p></Link>
+            <Link to="/c/search?genre=action" className='link'><p className='firstgenre'>Action</p></Link>
+            <Link to="/c/search?genre=adventure" className='link'><p>Adventure</p></Link>
+            <Link to="/c/search?genre=platformer" className='link'><p>Platformer</p></Link>
+            <Link to="/c/search?genre=fps" className='link'><p>FPS</p></Link>
+            <Link to="/c/search?genre=fighting" className='link'><p>Fighting</p></Link>
+            <Link to="/c/search?genre=stealth" className='link'><p>Stealth</p></Link>
+            <Link to="/c/search?genre=survival" className='link'><p>Survival</p></Link>
+            <Link to="/c/search?genre=horror" className='link'><p className='lastgenre'>Horror</p></Link>
           </div>
         </div>
 
