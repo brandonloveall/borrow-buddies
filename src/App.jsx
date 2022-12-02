@@ -11,6 +11,7 @@ import Login from "./components/login/Login.jsx"
 import {toggleLogin} from "./store/slices/loginSlice.js"
 import Signup from './components/signup/Signup';
 import {toggleSignup} from "./store/slices/signupSlice.js"
+import PostAGame from "./components/post a game/PostAGame.jsx"
 
 //TODO: USE REDUX TO IMPLEMENT ACCOUNT LINK
 
@@ -38,7 +39,9 @@ function App() {
               </div>
             </div>  
           </div> : null})()}
-          {(() => { return id ? <button className='accountbutton postagame'><p>Post a Game</p></button> : null})()}
+          {(() => { return id ? <Link className='accountbutton postagame' to="/c/postagame"><p>Post a Game</p></Link> : null})()}
+
+          <Link className='accountbutton postagame' to="/c/postagame"><p>Post a Game</p></Link>
 
           {(() => {return id === null ? <button className='accountbutton' onClick={() => {dispatch(toggleLogin())}}><p>Login</p></button> : null})()}
 
@@ -73,8 +76,8 @@ function App() {
       </nav>
 
       <Routes>
-        <Route exact path="/" element={<HomePage/>}>
-        </Route>
+        <Route exact path="/" element={<HomePage/>} />
+        <Route exact path="/c/postagame" element={<PostAGame />} />
       </Routes>
     </div>
   );

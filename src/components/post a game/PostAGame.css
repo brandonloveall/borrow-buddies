@@ -1,0 +1,107 @@
+.PostAGame {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.PostAGame .leftside, .PostAGame .rightside {
+    width: 50%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.PostAGame .imgholder {
+    height: 350px;
+    width: 275px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #A3B18A;
+}
+
+.PostAGame .imgupload {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.PostAGame img {
+    height: 100%;
+    width: 100%;
+}
+
+.PostAGame .rightside .topright input {
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(153, 153, 153);
+    background-color: rgb(218, 214, 214);
+    outline: none;
+    border-radius: 100px;
+    height: 30px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 120%
+}
+
+.PostAGame .rightside .genrelist {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 200px;
+}
+
+.PostAGame .rightside {
+    height: 100%;
+}
+
+.PostAGame .rightside .topright {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.PostAGame .rightside .topright div{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.PostAGame .rightside .bottomright {
+    height: 50%;
+}
+
+.PostAGame .locationchecker {
+    max-height: 200px;
+    width: 175px;
+    background-color: rgb(230, 230, 230);
+    overflow: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.PostAGame .location {
+    outline: none;
+    border-style: none;
+    background-color: rgba(255, 255, 255, 0);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
+    height: auto;
+}
+
+.PostAGame .location p{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1rem;
+    max-width: 100%;
+    word-break: normal;
+    white-space: normal;
+    text-align: start;
+}

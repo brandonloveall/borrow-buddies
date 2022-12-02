@@ -4,9 +4,10 @@
     justify-content: flex-start;
     align-items: flex-start;
     max-width: 1400px;
-    min-width: 400px;
+    min-width: 560px;
     width: 100%;
     background-color: white;
+    height: 100%;
 }
 
 .App header .myaccount{
