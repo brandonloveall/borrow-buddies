@@ -20,15 +20,18 @@ function PostAGame() {
 
     //if(id === null){window.location.href = "http://localhost:3000/"}
 
-    function handleSubmit() {
+    function handleImgChange() {
+        
+
         setPicture(loading)
 
         const formData = new FormData()
         formData.append("image", img.current)
 
-        axios.post("https://borrow-buddies.onrender.com/api/test", formData)
+        axios.post("http://localhost:3001/api/setimg", formData)
             .then(res => {
-                setPicture(res.data)
+                img.current = res.data
+                setPicture(img.current)
             })
     }
 
@@ -58,7 +61,7 @@ function PostAGame() {
             <div className="leftside">
                 <div className="imgupload">
                     <div className="imgholder"><img src={picture} alt="Game Picture" /></div>
-                    <input type="file" className="imguploadbutton" name="image" onChange={(e) => { img.current = (e.target.files[0]) }} />
+                    <input type="file" className="imguploadbutton" name="image" onChange={(e) => { img.current = (e.target.files[0]); handleImgChange() }} />
                 </div>
             </div>
 
@@ -77,7 +80,7 @@ function PostAGame() {
                     </div>
                 </div>
                 <div className="bottomright">
-                    <input type="submit" value="Post Game" onSubmit={(e) => { handleSubmit(e) }} />
+                    <input type="submit" value="Post Game" onSubmit={() => {  }} />
                 </div>
             </div>
         </div>

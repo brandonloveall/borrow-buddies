@@ -36,14 +36,13 @@ app.get("/c/*", (req, res) => {
     res.sendFile(path.join(__dirname), "build", "index.html")
 })
 
-app.post("/api/test", (req, res) => {
+app.post("/api/setimg", (req, res) => {
     const key = v4()
     fs.readFile(req.files.image.tempFilePath, (err, data1) => {
         if(err){console.log(err); return}
         
         s3.upload({Bucket: "borrowbuddies", Key: key, Body: data1}, (err, data2) => {
             if(err){console.log(err); return}
-            sequelize.query(`INSERT INTO games VALUES`)
 
             res.status(200).send(data2.Location)
 
