@@ -26,7 +26,7 @@ function PostAGame() {
         const formData = new FormData()
         formData.append("image", img.current)
 
-        axios.post("http://localhost:3001/api/test", formData)
+        axios.post("https://borrow-buddies.onrender.com/api/test", formData)
             .then(res => {
                 setPicture(res.data)
             })
