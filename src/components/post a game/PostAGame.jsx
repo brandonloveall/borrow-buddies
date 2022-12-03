@@ -18,37 +18,53 @@ function PostAGame() {
     const imgUUID = useRef()
     const [picture, setPicture] = useState(upload)
     const genres = useRef([])
-    const debounce = useRef(false)
+    const debounce = useRef()
+    debounce.current = false
 
-    let timer
-    let [buttonContent, setButtonContent] = "Post Game"
+    let timer = useRef()
+    let [buttonContent, setButtonContent] = useState("Post Game")
+
+    
 
 
     //if(id === null){window.location.href = "http://localhost:3001/"}
 
     function handleImgChange() {
 
-        if(debounce.current === false){window.alert("Please wait for the image to finish uploading."); return}
+        if (debounce.current === true) { window.alert("Please wait for the image to finish uploading."); return }
+
+
         setPicture(loading)
         debounce.current = true
 
         const formData = new FormData()
         formData.append("image", img.current)
 
-        axios.post("http://localhost:3001/api/setimg", formData)
+        if(imgUUID.current === undefined){
+            axios.post("http://localhost:3001/api/setimg", formData)
             .then(res => {
                 img.current = res.data.location
-                imgUUID.current = res.data.key
+                imgUUID.current = res.data.Key
                 setPicture(img.current)
                 debounce.current = false
             })
+        }
+        else{
+            axios.post(`http://localhost:3001/api/setimg?prev=${imgUUID.current}`, formData)
+            .then(res => {
+                img.current = res.data.location
+                imgUUID.current = res.data.Key
+                setPicture(img.current)
+                debounce.current = false
+            })
+        }
     }
 
     function handleLocations() {
-        clearTimeout(timer)
+        clearTimeout(timer.current)
 
         if (location && location !== "") {
-            timer = setTimeout(() => {
+            timer.current = setTimeout(() => {
                 axios.get(`http://localhost:3001/api/location/:${locationToSearch(location)}`)
                     .then(res => {
                         let arr = []
@@ -60,22 +76,26 @@ function PostAGame() {
                             setLocations(arr)
                         }
                     })
-            }, 500)
+            }, 1000)
         }
 
 
     }
 
     function handleSubmit() {
-        
+
         if (picture === upload) { window.alert("Please submit an image."); return }
         if (picture === loading) { window.alert("Please wait for image to finish uploading."); return }
+        if (imgUUID === undefined) {window.alert("Something went wrong with the image UUID!"); return}
         if (name === "" || name === null) { window.alert("Please enter a name."); return }
+        if(genres.current === undefined || genres.current === []){window.alert("Please select at least 1 genre."); return}
         if (trueLocation.current === null || trueLocation.current === "") { window.alert("Please enter a location."); return }
+        if(buttonContent === "Posting game..."){window.alert("Please wait for game to finish posting.")}
+
 
         if (buttonContent === "Post Game") {
             setButtonContent("Posting game...")
-            axios.post("http://localhost:3001/api/postgame", { picture: img.current, name: name.current, location: trueLocation.current, genres: genres.current })
+            axios.post("http://localhost:3001/api/postgame", { picture: img.current, name: name.current, location: trueLocation.current, genres: genres.current, uuid: imgUUID.current })
                 .then((req, res) => {
                     window.alert("Game has been posted!")
                     window.location.href = `http://localhost:3001/c/games/${res.data}`
@@ -83,8 +103,8 @@ function PostAGame() {
         }
     }
 
-    function handleGenreclick(genre){
-        if(genres.current.indexOf(genre) === -1){genres.current.push(genre); console.log(genres.current); return}
+    function handleGenreclick(genre) {
+        if (genres.current.indexOf(genre) === -1) { genres.current.push(genre); console.log(genres.current); return }
         genres.current.splice(genres.current.indexOf(genre), 1)
         console.log(genres.current)
     }
@@ -115,39 +135,39 @@ function PostAGame() {
                 <div className="bottomright">
                     <div className="genreHolder">
                         <div className="checkboxholder">
-                            <input type="checkbox" name="Action" onClick={() => {handleGenreclick("Action")}}/>
+                            <input type="checkbox" name="Action" onClick={() => { handleGenreclick("Action") }} />
                             <label htmlFor="Action">Action</label>
                         </div>
                         <div className="checkboxholder">
-                            <input type="checkbox" name="Adventure" onClick={() => {handleGenreclick("Adventure")}}/>
+                            <input type="checkbox" name="Adventure" onClick={() => { handleGenreclick("Adventure") }} />
                             <label htmlFor="Adventure">Adventure</label>
                         </div>
                         <div className="checkboxholder">
-                            <input type="checkbox" name="Platformer" onClick={() => {handleGenreclick("Platformer")}}/>
+                            <input type="checkbox" name="Platformer" onClick={() => { handleGenreclick("Platformer") }} />
                             <label htmlFor="Platformer">Platformer</label>
                         </div>
                         <div className="checkboxholder">
-                            <input type="checkbox" name="FPS" onClick={() => {handleGenreclick("FPS")}}/>
+                            <input type="checkbox" name="FPS" onClick={() => { handleGenreclick("FPS") }} />
                             <label htmlFor="FPS">FPS</label>
                         </div>
                         <div className="checkboxholder">
-                            <input type="checkbox" name="Fighting" onClick={() => {handleGenreclick("Fighting")}}/>
+                            <input type="checkbox" name="Fighting" onClick={() => { handleGenreclick("Fighting") }} />
                             <label htmlFor="Fighting">Fighting</label>
                         </div>
                         <div className="checkboxholder">
-                            <input type="checkbox" name="Stealth" onClick={() => {handleGenreclick("Stealth")}}/>
+                            <input type="checkbox" name="Stealth" onClick={() => { handleGenreclick("Stealth") }} />
                             <label htmlFor="Stealth">Stealth</label>
                         </div>
                         <div className="checkboxholder">
-                            <input type="checkbox" name="Survival" onClick={() => {handleGenreclick("Survival")}}/>
+                            <input type="checkbox" name="Survival" onClick={() => { handleGenreclick("Survival") }} />
                             <label htmlFor="Survival">Survival</label>
                         </div>
                         <div className="checkboxholder">
-                            <input type="checkbox" name="Horror" onClick={() => {handleGenreclick("Horror")}}/>
+                            <input type="checkbox" name="Horror" onClick={() => { handleGenreclick("Horror") }} />
                             <label htmlFor="Horror">Horror</label>
                         </div>
                     </div>
-                    <button className="submitGameButton" onClick={() => { handleSubmit() }}><p>Post Game</p></button>
+                    <button className="submitGameButton" onClick={() => { handleSubmit() }}><p>{buttonContent}</p></button>
                 </div>
             </div>
         </div>
