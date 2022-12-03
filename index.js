@@ -43,8 +43,9 @@ app.post("/api/setimg", (req, res) => {
         
         s3.upload({Bucket: "borrowbuddies", Key: key, Body: data1}, (err, data2) => {
             if(err){console.log(err); return}
+            console.log(data2)
 
-            res.status(200).send(data2.Location)
+            res.status(200).send({location: data2.Location, key: data2.Key})
 
         })
     })
@@ -54,6 +55,9 @@ app.get("/api/location/:location", (req, res) => {
     fetch(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${req.params.location}&key=AIzaSyBoTYIDW7jaod1TCyCqT7wgBjD9262rN5k`)
     .then(res2 => res2.json())
     .then(json => res.status(200).send(json))
+})
+
+app.post("/api/postgame", (req, res) => {
     
 })
 

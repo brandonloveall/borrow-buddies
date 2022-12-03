@@ -74,6 +74,8 @@
 
 .PostAGame .rightside .bottomright {
     height: 50%;
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 .PostAGame .locationchecker {
@@ -104,4 +106,28 @@
     word-break: normal;
     white-space: normal;
     text-align: start;
+}
+
+.PostAGame .genreHolder {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 200px;
+}
+
+.PostAGame .genreHolder .checkboxholder {
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.PostAGame .submitGameButton {
+    cursor: pointer;
+}
+
+.PostAGame .submitGameButton:hover {
+    cursor: pointer;
+}
+
+.PostAGame .submitGameButton p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.2rem;
 }
