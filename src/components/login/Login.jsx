@@ -10,16 +10,21 @@ function Login(props) {
     const username = useRef()
     const password = useRef()
 
-    function handleSubmit() {
+    function handleSubmit(e) {
+        e.preventDefault()
+
         if(username.current === undefined || password.current === undefined){
             window.alert("Please input your login information.")
         }else {
-            axios.get(`http://localhost:3000/api/login?username=${username}&password=${password}`)
+            axios.get(`http://localhost:3001/api/login?username=${username.current}&password=${password.current}`)
             .then(res => {
-                if (res.status === 404){
-                    window.alert("Username or password is incorrect.")
+                console.log(res)
+                if (res.data === false){
+                    window.alert("Username or password does not match.")
                 }else{
-                    dispatch(setLogin({id: res.body.id, username: res.body.username}))
+                    console.log(res.data)
+                    dispatch(setLogin({id: res.data.id, username: res.data.username}))
+                    dispatch(toggleLogin())
                 }
             })
         }
@@ -32,10 +37,10 @@ function Login(props) {
             </div>
 
             <div className="loginHolder">
-                <form onSubmit={(e) => {e.preventDefault(); handleSubmit()}}>
+                <form onSubmit={(e) => {handleSubmit(e)}}>
                     <h3>Welcome back!</h3>
                     <input type="text" className="username" placeholder="Username" onChange={(e) => {username.current = e.target.value}}/>
-                    <input type="text" className="username" placeholder="Password" onChange={(e) => {password.current = e.target.value}}/>
+                    <input type="password" className="username" placeholder="Password" onChange={(e) => {password.current = e.target.value}}/>
                     <input type="submit" value="Login"/>
                 </form>
             </div>

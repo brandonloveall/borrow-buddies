@@ -33,19 +33,17 @@ function App() {
           {(() => {return id ? <div className='myaccount'><button className='accountbutton' onClick={() => {accountDropdown === "none" ? setAccountDropdown("flex") : setAccountDropdown("none")}}><p>My Account</p></button>
             <div className='accountdropdownholder'>
               <div className='accountdropdown' style={{display: accountDropdown}}>
-                <Link to={`/c/account/${id}`} className='myaccount'><p>View Profile</p></Link>
-                <Link to="/c/settings" className='settings'><p>Settings</p></Link>
-                <button className='signout' onClick={() => {dispatch(logout())}}><p>Sign Out</p></button>
+                <Link to={`/c/account/${username}`} className='myaccount' onClick={() => {setAccountDropdown("none")}}><p>View Profile</p></Link>
+                <Link to="/c/settings" className='settings' onClick={() => {setAccountDropdown("none")}}><p>Settings</p></Link>
+                <button className='signout' onClick={() => {dispatch(logout()); setAccountDropdown("none")}}><p>Sign Out</p></button>
               </div>
             </div>  
           </div> : null})()}
           {(() => { return id ? <Link className='accountbutton postagame' to="/c/postagame"><p>Post a Game</p></Link> : null})()}
 
-          <Link className='accountbutton postagame' to="/c/postagame"><p>Post a Game</p></Link>
+          {(() => {return !id ? <button className='accountbutton' onClick={() => {dispatch(toggleLogin())}}><p>Login</p></button> : null})()}
 
-          {(() => {return id === null ? <button className='accountbutton' onClick={() => {dispatch(toggleLogin())}}><p>Login</p></button> : null})()}
-
-          {(() => {return id === null ? <button className='accountbutton' onClick={() => {dispatch(toggleSignup())}}><p>Sign Up</p></button> : null})()}
+          {(() => {return !id ? <button className='accountbutton' onClick={() => {dispatch(toggleSignup())}}><p>Sign Up</p></button> : null})()}
           
           {(() => {return id ? <Link to="/c/mycart" className='cart'><img src={cart} alt="" /></Link> : null})()}
           
