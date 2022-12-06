@@ -12,6 +12,7 @@ import {toggleLogin} from "./store/slices/loginSlice.js"
 import Signup from './components/signup/Signup';
 import {toggleSignup} from "./store/slices/signupSlice.js"
 import PostAGame from "./components/post a game/PostAGame.jsx"
+import GameList from './components/game list/GameList';
 
 //TODO: USE REDUX TO IMPLEMENT ACCOUNT LINK
 
@@ -59,14 +60,14 @@ function App() {
           </div>
 
           <div className='genreHolder'>
-            <Link to="/c/search?genre=action" className='link'><p className='firstgenre'>Action</p></Link>
-            <Link to="/c/search?genre=adventure" className='link'><p>Adventure</p></Link>
-            <Link to="/c/search?genre=platformer" className='link'><p>Platformer</p></Link>
-            <Link to="/c/search?genre=fps" className='link'><p>FPS</p></Link>
-            <Link to="/c/search?genre=fighting" className='link'><p>Fighting</p></Link>
-            <Link to="/c/search?genre=stealth" className='link'><p>Stealth</p></Link>
-            <Link to="/c/search?genre=survival" className='link'><p>Survival</p></Link>
-            <Link to="/c/search?genre=horror" className='link'><p className='lastgenre'>Horror</p></Link>
+            <Link to="/c/search?genre=action?page=1" className='link'><p className='firstgenre'>Action</p></Link>
+            <Link to="/c/search?genre=adventure?page=1" className='link'><p>Adventure</p></Link>
+            <Link to="/c/search?genre=platformer?page=1" className='link'><p>Platformer</p></Link>
+            <Link to="/c/search?genre=fps?page=1" className='link'><p>FPS</p></Link>
+            <Link to="/c/search?genre=fighting?page=1" className='link'><p>Fighting</p></Link>
+            <Link to="/c/search?genre=stealth?page=1" className='link'><p>Stealth</p></Link>
+            <Link to="/c/search?genre=survival?page=1" className='link'><p>Survival</p></Link>
+            <Link to="/c/search?genre=horror?page=1" className='link'><p className='lastgenre'>Horror</p></Link>
           </div>
         </div>
 
@@ -75,7 +76,8 @@ function App() {
 
       <Routes>
         <Route exact path="/" element={<HomePage/>} />
-        <Route exact path="/c/postagame" element={<PostAGame />} />
+        <Route path="/c/postagame" element={<PostAGame />} />
+        <Route path="/c/search" element={<GameList />}/>
       </Routes>
     </div>
   );
