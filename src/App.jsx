@@ -60,14 +60,14 @@ function App() {
           </div>
 
           <div className='genreHolder'>
-            <Link to="/c/search?genre=action?page=1" className='link'><p className='firstgenre'>Action</p></Link>
-            <Link to="/c/search?genre=adventure?page=1" className='link'><p>Adventure</p></Link>
-            <Link to="/c/search?genre=platformer?page=1" className='link'><p>Platformer</p></Link>
-            <Link to="/c/search?genre=fps?page=1" className='link'><p>FPS</p></Link>
-            <Link to="/c/search?genre=fighting?page=1" className='link'><p>Fighting</p></Link>
-            <Link to="/c/search?genre=stealth?page=1" className='link'><p>Stealth</p></Link>
-            <Link to="/c/search?genre=survival?page=1" className='link'><p>Survival</p></Link>
-            <Link to="/c/search?genre=horror?page=1" className='link'><p className='lastgenre'>Horror</p></Link>
+            <Link to="/c/search?genre=Action&page=1" className='link'><p className='firstgenre'>Action</p></Link>
+            <Link to="/c/search?genre=Adventure&page=1" className='link'><p>Adventure</p></Link>
+            <Link to="/c/search?genre=Platformer&page=1" className='link'><p>Platformer</p></Link>
+            <Link to="/c/search?genre=Fps&page=1" className='link'><p>FPS</p></Link>
+            <Link to="/c/search?genre=Fighting&page=1" className='link'><p>Fighting</p></Link>
+            <Link to="/c/search?genre=Stealth&page=1" className='link'><p>Stealth</p></Link>
+            <Link to="/c/search?genre=Survival&page=1" className='link'><p>Survival</p></Link>
+            <Link to="/c/search?genre=Horror&page=1" className='link'><p className='lastgenre'>Horror</p></Link>
           </div>
         </div>
 
