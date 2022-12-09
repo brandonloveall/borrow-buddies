@@ -2,6 +2,7 @@ import "./GameList.css"
 import { useSearchParams, Link, useLocation } from "react-router-dom"
 import axios from "axios"
 import {useEffect, useState} from "react"
+import GameResult from "../game result/GameResult.jsx"
 
 function GameList(){
     //genre, page, 
@@ -10,23 +11,22 @@ function GameList(){
     const location = useLocation()
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/api/pagecount?name=${searchParams.get("term")}&location=${searchParams.get("location")}&genre=${searchParams.get("genre")}&page=${searchParams.get("page")}`)
+        axios.get(`http://localhost:3001/api/gamesearch?name=${searchParams.get("term")}&location=${searchParams.get("location")}&genre=${searchParams.get("genre")}&page=${searchParams.get("page")}`)
         .then(res => {setGames(res.data)})
         
-    }, [searchParams])
+    }, [])
 
     return(
         <div className="GameList">
             <div className="gameresults">
-                {(games.map(() => {
-                    return (<div></div>)
+                {(games.map((e, i) => {
+                    return (<GameResult />)
                 }))}
             </div>
             <footer className="pagenums">
                 {(() => {
                     for(let i = 0; i < games.length; i++){
-                        console.log(i)
-                        return (<button className="pagenum"><p>{i + 1}</p></button>)
+                        return (<button className="pagenum" key={i} onClick={() => {setSearchParams({page: i + 1}); console.log(searchParams)}}><p>{i + 1}</p></button>)
                     }
                 })()}
             </footer>

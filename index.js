@@ -141,32 +141,16 @@ app.get("/api/gamesearch", (req, res) => {
     let query = `${req.query[keys[0]] && req.query[keys[0]] !== "null" ? `WHERE ${keys[0]} = '${req.query[keys[0]]}'` : ""}${req.query[keys[1]] !== "null" && req.query[keys[1]] ? ` AND ${keys[1]} = '${req.query[keys[1]]}'` : ""}${req.query[keys[2]] !== "null" && req.query[keys[2]] !== undefined ? ` AND ${keys[2]} = '${req.query[keys[2]]}'` : ""}`
 
     sequelize.query(`
-        SELECT (name, image, location) 
+        SELECT DISTINCT (name, image, location) 
         FROM games 
         JOIN genre_game ON games.id = genre_game.game_id 
         JOIN genres ON genre_game.genre_id = genres.id 
         ${query} 
         LIMIT 20 ${req.query.page ? `OFFSET ${(req.query.page - 1) * 20}` : ""}`)
         .then(dbRes => {
+            console.log(dbRes[0])
             res.status(200).send(dbRes[0])
         })
-})
-
-app.get("/api/pagecount" , (req, res) => {
-    let keys = Object.keys(req.query)
-
-    let query = `${req.query[keys[0]] && req.query[keys[0]] !== "null" ? `WHERE ${keys[0]} = '${req.query[keys[0]]}'` : ""}${req.query[keys[1]] !== "null" && req.query[keys[1]] ? ` AND ${keys[1]} = '${req.query[keys[1]]}'` : ""}${req.query[keys[2]] !== "null" && req.query[keys[2]] !== undefined ? ` AND ${keys[2]} = '${req.query[keys[2]]}'` : ""}`
-
-    sequelize.query(`
-        SELECT COUNT(*) 
-        FROM games 
-        JOIN genre_game ON games.id = genre_game.game_id 
-        JOIN genres ON genre_game.genre_id = genres.id 
-        ${query}`)
-        .then(dbRes => {
-            res.status(200).send(dbRes[0])
-        })
-
 })
 
 app.listen(process.env.PORT || 3001)

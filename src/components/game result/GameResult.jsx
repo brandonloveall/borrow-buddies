@@ -1,6 +1,9 @@
-import "../game result.css"
+import "./GameResult.css"
+import { Link } from "react-router-dom"
 
-function GameResult(){
+function GameResult(props){
+
+
     return(
         <div className="GameResult">
 
