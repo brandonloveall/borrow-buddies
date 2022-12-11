@@ -7,7 +7,6 @@ import loading from "../../assets/loading.gif"
 import { locationToSearch } from "../../moduleexports"
 
 
-
 function PostAGame() {
     const id = useSelector((state) => state.accountInfo.id)
     const img = useRef()
@@ -91,14 +90,14 @@ function PostAGame() {
         if(genres.current === undefined || genres.current === []){window.alert("Please select at least 1 genre."); return}
         if (trueLocation.current === null || trueLocation.current === "") { window.alert("Please enter a location."); return }
         if(buttonContent === "Posting game..."){window.alert("Please wait for game to finish posting.")}
-
+        let realName = locationToSearch(name.current)
 
         if (buttonContent === "Post Game") {
             setButtonContent("Posting game...")
-            axios.post("http://localhost:3001/api/postgame", { picture: img.current, name: name.current, location: trueLocation.current, genres: genres.current, uuid: imgUUID.current })
+            axios.post("http://localhost:3001/api/postgame", { picture: img.current, name: realName, location: trueLocation.current, genres: genres.current, uuid: imgUUID.current })
                 .then((res) => {
                     window.alert("Game has been posted!")
-                    window.location.href = `http://localhost:3001/c/games/${res.data}`
+                    window.location.href = `http://localhost:3000/c/games/${res.data}`
                 })
         }
     }
@@ -120,12 +119,12 @@ function PostAGame() {
 
             <div className="rightside">
                 <div className="topright">
-                    <input type="text" placeholder="Enter name" onChange={(e) => { name.current = e.target.value }} />
+                    <input type="text" placeholder="Enter name" onChange={(e) => { name.current = e.target.value; }} />
                     <input type="text" placeholder="Enter location (City, State)" value={location} onChange={(e) => { setLocation(e.target.value); handleLocations() }} />
                     <div className="locationchecker">
-                        {locations.map((e) => {
+                        {locations.map((e, i) => {
                             return (
-                                <button className="location" onClick={() => { setLocation(e); setLocations([]); trueLocation.current = e }}>
+                                <button className="location" key={i} onClick={() => { setLocation(e); setLocations([]); trueLocation.current = e }}>
                                     <p>{e}</p>
                                 </button>
                             )

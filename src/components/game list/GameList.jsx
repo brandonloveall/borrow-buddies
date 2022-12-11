@@ -14,13 +14,13 @@ function GameList(){
         axios.get(`http://localhost:3001/api/gamesearch?name=${searchParams.get("term")}&location=${searchParams.get("location")}&genre=${searchParams.get("genre")}&page=${searchParams.get("page")}`)
         .then(res => {setGames(res.data)})
         
-    }, [])
+    }, [location])
 
     return(
         <div className="GameList">
             <div className="gameresults">
                 {(games.map((e, i) => {
-                    return (<GameResult />)
+                    return (<GameResult color={i % 2 === 0 ? "#A3B18A" : "#588157"}/>)
                 }))}
             </div>
             <footer className="pagenums">

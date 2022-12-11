@@ -137,7 +137,6 @@ app.get("/api/login", (req, res) => {
 
 app.get("/api/gamesearch", (req, res) => {
     let keys = Object.keys(req.query)
-
     let query = `${req.query[keys[0]] && req.query[keys[0]] !== "null" ? `WHERE ${keys[0]} = '${req.query[keys[0]]}'` : ""}${req.query[keys[1]] !== "null" && req.query[keys[1]] ? ` AND ${keys[1]} = '${req.query[keys[1]]}'` : ""}${req.query[keys[2]] !== "null" && req.query[keys[2]] !== undefined ? ` AND ${keys[2]} = '${req.query[keys[2]]}'` : ""}`
 
     sequelize.query(`
