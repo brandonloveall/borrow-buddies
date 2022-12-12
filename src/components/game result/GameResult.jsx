@@ -7,8 +7,12 @@ function GameResult(props){
 
     return(
         <div className="GameResult" style={{backgroundColor: props.color}}>
-            <Link className="gameresultlink">
-                <img src={test} alt="" />
+            <Link className="gameresultlink" to={`/c/game/${props.id}`}>
+                <img src={props.image} alt="" />
+                <div>
+                    <p className="title">{props.title}</p>
+                    <p className="location">{props.location}</p>
+                </div>
             </Link>
         </div>
     )

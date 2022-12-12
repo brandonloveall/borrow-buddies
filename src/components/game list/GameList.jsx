@@ -20,7 +20,7 @@ function GameList(){
         <div className="GameList">
             <div className="gameresults">
                 {(games.map((e, i) => {
-                    return (<GameResult color={i % 2 === 0 ? "#A3B18A" : "#588157"}/>)
+                    return (<GameResult color={i % 2 === 0 ? "#A3B18A" : "#588157"} image={e.image} title={e.name} location={e.location} id={e.id}/>)
                 }))}
             </div>
             <footer className="pagenums">
