@@ -13,7 +13,7 @@
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -35,4 +35,11 @@
 
 .GameResult .title {
     color: black;
+}
+
+.GameResult .leftside {
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 }
