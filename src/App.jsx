@@ -1,7 +1,7 @@
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
-import { useState } from 'react';
-import cart from "./assets/cart.svg"
+import { useEffect, useState } from 'react';
+import bell from "./assets/bell.svg"
 import search from "./assets/search.svg"
 import {useSelector, useDispatch} from "react-redux"
 import {logout} from "./store/slices/accountInfoSlice.js"
@@ -13,6 +13,7 @@ import Signup from './components/signup/Signup';
 import {toggleSignup} from "./store/slices/signupSlice.js"
 import PostAGame from "./components/post a game/PostAGame.jsx"
 import GameList from './components/game list/GameList';
+import axios from "axios"
 
 //TODO: USE REDUX TO IMPLEMENT ACCOUNT LINK
 
@@ -24,6 +25,11 @@ function App() {
   const displaySignup = useSelector((state) => state.signup.display)
   const username = useSelector((state) => state.accountInfo.username)
   const [searchTerm, setSearchTerm] = useState("")
+  const [alerts, setAlerts] = useState(0)
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/").then(res => {setAlerts(res.data)})
+  }, [])
 
   return (
     <div className='App'>
@@ -46,7 +52,7 @@ function App() {
 
           {(() => {return !id ? <button className='accountbutton' onClick={() => {dispatch(toggleSignup())}}><p>Sign Up</p></button> : null})()}
           
-          {(() => {return id ? <Link to="/c/mycart" className='cart'><img src={cart} alt="" /></Link> : null})()}
+          {(() => {return id ? <Link to="/c/myalerts" className='cart'><img src={bell} alt="" /><p className='messagecount'>{alerts}</p></Link> : null})()}
           
         </div>
       </header>

@@ -152,7 +152,7 @@ app.get("/api/gamesearch", (req, res) => {
         JOIN genres ON genre_game.genre_id = genres.id 
         ${query}
         ORDER BY name, games.id, image, location 
-        LIMIT 20 ${req.query.page ? `OFFSET ${(req.query.page - 1) * 20}` : ""}`)
+        LIMIT 10 ${req.query.page ? `OFFSET ${(req.query.page - 1) * 10}` : ""}`)
         .then(dbRes => {
             res.status(200).send(dbRes[0])
         })

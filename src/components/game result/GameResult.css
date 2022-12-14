@@ -3,27 +3,17 @@
     height: 150px;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.GameResult .gameresultlink {
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
 }
 
-.GameResult .gameresultlink img {
+.GameResult img {
     height: 80%;
     aspect-ratio: 4/5;
     margin-left: 20px;
 }
 
-.GameResult .gameresultlink p {
+.GameResult p {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin-left: 5px;
     font-size: 1.5rem;
@@ -42,4 +32,20 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+}
+
+.GameResult .rightside {
+    margin-right: 20px;
+}
+
+.GameResult .rightside button {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-style: solid;
+    font-size: 1.2rem;
+    border-radius: 100px;
+    color: #DAD7CD;
+    border-color: #344E41;
+    background-color: #3A5A40;
+    padding: 4px;
+    cursor: pointer;
 }

@@ -220,3 +220,11 @@ a {
 .App .postagame {
     background: #A3B18A;
 }
+
+.App .messagecount {
+    position: absolute;
+    transform: translate(10px, 10px);
+    background-color: rgb(235, 0, 0);
+    color: white !important;
+    border-radius: 100px;
+}

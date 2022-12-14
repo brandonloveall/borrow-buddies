@@ -17,6 +17,7 @@ function PostAGame() {
     const imgUUID = useRef()
     const [picture, setPicture] = useState(upload)
     const genres = useRef([])
+    console.log(genres.current)
     const debounce = useRef()
     debounce.current = false
 
@@ -87,7 +88,7 @@ function PostAGame() {
         if (picture === loading) { window.alert("Please wait for image to finish uploading."); return }
         if (imgUUID === undefined) {window.alert("Something went wrong with the image UUID!"); return}
         if (name === "" || name === null) { window.alert("Please enter a name."); return }
-        if(genres.current === undefined || genres.current === []){window.alert("Please select at least 1 genre."); return}
+        if(genres.current === undefined || genres.current.length === 0){window.alert("Please select at least 1 genre."); return}
         if (trueLocation.current === null || trueLocation.current === "") { window.alert("Please enter a location."); return }
         if(buttonContent === "Posting game..."){window.alert("Please wait for game to finish posting.")}
         let realName = locationToSearch(name.current)
@@ -97,7 +98,7 @@ function PostAGame() {
             axios.post("http://localhost:3001/api/postgame", { picture: img.current, name: realName, location: trueLocation.current, genres: genres.current, uuid: imgUUID.current })
                 .then((res) => {
                     window.alert("Game has been posted!")
-                    window.location.href = `http://localhost:3000/c/games/${res.data}`
+                    window.location.href = `http://localhost:3000/`
                 })
         }
     }

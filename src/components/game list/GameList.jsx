@@ -1,20 +1,30 @@
 import "./GameList.css"
 import { useSearchParams, Link, useLocation } from "react-router-dom"
 import axios from "axios"
-import {useEffect, useState} from "react"
+import {useEffect, useState, useRef, useLayoutEffect} from "react"
 import GameResult from "../game result/GameResult.jsx"
 
 function GameList(){
     //genre, page, 
     let [searchParams, setSearchParams] = useSearchParams()
-    let [games, setGames] = useState([])
+    let [games, setGames] = useState([{count: "0"}])
+    let [pagenums, setPageNums] = useState([])
     const location = useLocation()
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         axios.get(`http://localhost:3001/api/gamesearch?name=${searchParams.get("term")}&location=${searchParams.get("location")}&genre=${searchParams.get("genre")}&page=${searchParams.get("page")}`)
         .then(res => {setGames(res.data)})
         
     }, [location])
+
+    useLayoutEffect(() => {
+        let arr = []
+        for(let i = 1; i <= Math.ceil(Number(games[0].count)/10); i++){
+            arr.push(<button className="pagenum" key={i} onClick={() => {setSearchParams({page: i}); console.log(searchParams)}}><p>{i}</p></button>)
+        }
+
+        setPageNums(arr)
+    }, [games])
 
     return(
         <div className="GameList">
@@ -26,11 +36,7 @@ function GameList(){
                 }))}
             </div>
             <footer className="pagenums">
-                {games.map((e,i) => {
-                    if(i % 10 === 0){
-                        return (<button className="pagenum" key={i} onClick={() => {setSearchParams({page: Math.ceil(i + 1/10)}); console.log(searchParams)}}><p>{Math.ceil(i + 1/10)}</p></button>)
-                    }
-                })}
+                {pagenums}
             </footer>
         </div>
     )
