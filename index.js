@@ -107,7 +107,7 @@ app.post("/api/signup", (req, res) => {
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(req.query.password, salt, (err2, result) => {
                     if(err){console.log(err); return}
-                    sequelize.query(`INSERT INTO users (username, password) VALUES ('${req.query.username}', '${result}')`)
+                    sequelize.query(`INSERT INTO users (username, password, phone_number) VALUES ('${req.query.username}', '${result}', '${req.query.phonenumber}')`)
                     .then(sequelize.query(`SELECT id, username FROM users WHERE username = '${req.query.username}'`).then((dbRes2 => {console.log(dbRes2[0]); res.status(200).send(dbRes2[0])})))
                 })
             })
