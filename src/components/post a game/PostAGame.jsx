@@ -27,7 +27,7 @@ function PostAGame() {
     
 
 
-    //if(id === null){window.location.href = "http://localhost:3001/"}
+    if(id === null){window.location.href = "http://localhost:3001/"}
 
     function handleImgChange() {
 
@@ -95,7 +95,7 @@ function PostAGame() {
 
         if (buttonContent === "Post Game") {
             setButtonContent("Posting game...")
-            axios.post("http://localhost:3001/api/postgame", { picture: img.current, name: realName, location: trueLocation.current, genres: genres.current, uuid: imgUUID.current })
+            axios.post("http://localhost:3001/api/postgame", { picture: img.current, name: realName, location: trueLocation.current, genres: genres.current, uuid: imgUUID.current, user_uuid: id })
                 .then((res) => {
                     window.alert("Game has been posted!")
                     window.location.href = `http://localhost:3000/`

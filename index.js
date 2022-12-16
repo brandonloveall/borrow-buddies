@@ -88,7 +88,7 @@ app.get("/api/location/:location", (req, res) => {
 
 //POST GAME TO DB
 app.post("/api/postgame", (req, res) => {
-    sequelize.query(`INSERT INTO games (name, image, bucket_id, location) VALUES ('${req.body.name}', '${req.body.picture}', '${req.body.uuid}', '${req.body.location}')`)
+    sequelize.query(`INSERT INTO games (name, image, bucket_id, location, user_uuid) VALUES ('${req.body.name}', '${req.body.picture}', '${req.body.uuid}', '${req.body.location}', '${req.body.user_uuid}')`)
     .then(() => {
         for(let i = 0; i < req.body.genres.length; i++){
             sequelize.query(`INSERT INTO genre_game (genre_id, game_id) VALUES ((SELECT id FROM genres WHERE genre = '${req.body.genres[i]}'), (SELECT id FROM games WHERE bucket_id = '${req.body.uuid}'))`)
@@ -146,16 +146,31 @@ app.get("/api/gamesearch", (req, res) => {
         JOIN genres ON genre_game.genre_id = genres.id 
         ${query};
 
-        SELECT DISTINCT games.id, games.name, image, location
+        SELECT DISTINCT games.id, games.name, image, location, user_uuid 
         FROM games 
         JOIN genre_game ON games.id = genre_game.game_id 
         JOIN genres ON genre_game.genre_id = genres.id 
         ${query}
-        ORDER BY name, games.id, image, location 
+        ORDER BY name, games.id, image, location, user_uuid 
         LIMIT 10 ${req.query.page ? `OFFSET ${(req.query.page - 1) * 10}` : ""}`)
         .then(dbRes => {
             res.status(200).send(dbRes[0])
         })
+})
+
+app.post("/api/gamerequest", (req, res) => {
+
+    sequelize.query(`
+    INSERT INTO game_requester_requestee (requester_id, requestee_id, game_id) 
+    SELECT '${req.query.requesterid}', '${req.query.ownerid}', '${req.query.gameid}'
+    WHERE
+        NOT EXISTS (
+            SELECT id FROM game_requester_requestee 
+            WHERE requester_id = '${req.query.requesterid}' 
+            AND requestee_id = '${req.query.ownerid}' 
+            AND game_id = '${req.query.gameid}'
+        )
+    `)
 })
 
 app.listen(process.env.PORT || 3001)
