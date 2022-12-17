@@ -1,0 +1,28 @@
+.MyGameList {
+    width: 100%;
+    height: calc(100% - 94px);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.MyGameList .gameresults {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: auto;
+}
+
+.MyGameList .pagenum {
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    background-color: #3A5A40;
+    cursor: pointer;
+}

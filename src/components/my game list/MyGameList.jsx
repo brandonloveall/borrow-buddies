@@ -1,11 +1,11 @@
-import "./GameList.css"
+import "./MyGameList.css"
 import { useSearchParams, Link, useLocation } from "react-router-dom"
 import axios from "axios"
 import {useEffect, useState, useRef, useLayoutEffect} from "react"
 import GameResult from "../game result/GameResult.jsx"
 import { useSelector } from "react-redux"
 
-function GameList(){
+function MyGameList(){
     //genre, page, 
     let [searchParams, setSearchParams] = useSearchParams()
     let [games, setGames] = useState([{count: "0"}])
@@ -29,7 +29,7 @@ function GameList(){
     }, [games])
 
     return(
-        <div className="GameList">
+        <div className="MyGameList">
             <div className="gameresults">
                 {(games.map((e, i) => {
                     if(e.id){
@@ -47,4 +47,4 @@ function GameList(){
     )
 }
 
-export default GameList
+export default MyGameList

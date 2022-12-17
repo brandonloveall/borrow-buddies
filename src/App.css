@@ -93,7 +93,7 @@
     border-width: 2px;
     display: flex;
     flex-flow: column nowrap;
-    min-width: 100px;
+    min-width: 125px;
 }
 
 .App .borrowbuddies {

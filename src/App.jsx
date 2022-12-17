@@ -12,8 +12,9 @@ import {toggleLogin} from "./store/slices/loginSlice.js"
 import Signup from './components/signup/Signup';
 import {toggleSignup} from "./store/slices/signupSlice.js"
 import PostAGame from "./components/post a game/PostAGame.jsx"
-import GameList from './components/game list/GameList';
+import GameList from './components/game list/GameList.jsx';
 import axios from "axios"
+import MyGameList from "./components/my game list/MyGameList.jsx"
 
 //TODO: USE REDUX TO IMPLEMENT ACCOUNT LINK
 
@@ -40,7 +41,7 @@ function App() {
           {(() => {return id ? <div className='myaccount'><button className='accountbutton' onClick={() => {accountDropdown === "none" ? setAccountDropdown("flex") : setAccountDropdown("none")}}><p>My Account</p></button>
             <div className='accountdropdownholder'>
               <div className='accountdropdown' style={{display: accountDropdown}}>
-                <Link to={`/c/account/${username}`} className='myaccount' onClick={() => {setAccountDropdown("none")}}><p>View Profile</p></Link>
+                <Link to={`/c/mygames`} className='myaccount' onClick={() => {setAccountDropdown("none")}}><p>View My Games</p></Link>
                 <Link to="/c/settings" className='settings' onClick={() => {setAccountDropdown("none")}}><p>Settings</p></Link>
                 <button className='signout' onClick={() => {dispatch(logout()); setAccountDropdown("none")}}><p>Sign Out</p></button>
               </div>
@@ -84,6 +85,7 @@ function App() {
         <Route exact path="/" element={<HomePage/>} />
         <Route path="/c/postagame" element={<PostAGame />} />
         <Route path="/c/search" element={<GameList />}/>
+        <Route path="/c/mygames" element={<MyGameList />}/>
       </Routes>
     </div>
   );
