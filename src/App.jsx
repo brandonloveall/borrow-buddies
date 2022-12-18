@@ -28,10 +28,6 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const [alerts, setAlerts] = useState(0)
 
-  useEffect(() => {
-    axios.get("http://localhost:3001/api/").then(res => {setAlerts(res.data)})
-  }, [])
-
   return (
     <div className='App'>
       <Login display={displayLogin}/>

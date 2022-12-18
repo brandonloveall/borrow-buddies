@@ -108,7 +108,7 @@ app.post("/api/signup", (req, res) => {
                 bcrypt.hash(req.query.password, salt, (err2, result) => {
                     if(err){console.log(err); return}
                     sequelize.query(`INSERT INTO users (username, password, phone_number) VALUES ('${req.query.username}', '${result}', '${req.query.phonenumber}')`)
-                    .then(sequelize.query(`SELECT id, username FROM users WHERE username = '${req.query.username}'`).then((dbRes2 => {console.log(dbRes2[0]); res.status(200).send(dbRes2[0])})))
+                    .then(sequelize.query(`SELECT id, username FROM users WHERE username = '${req.query.username}'`).then((dbRes2 => {res.status(200).send(dbRes2[0])})))
                 })
             })
         }
@@ -171,6 +171,22 @@ app.post("/api/gamerequest", (req, res) => {
             AND game_id = '${req.query.gameid}'
         )
     `)
+    .then(dbRes => {res.status(200).send()})
+})
+
+app.get("/api/usergames/:id", (req, res) => {
+    sequelize.query(`
+        SELECT COUNT(DISTINCT games.id)
+        FROM games 
+        WHERE user_uuid = '${req.params.id}';
+
+        SELECT DISTINCT games.id, games.name, image, location
+        FROM games
+        WHERE user_uuid = '${req.params.id}'
+        ORDER BY games.name, games.id, image, location 
+        LIMIT 10 ${req.query.page ? `OFFSET ${(req.query.page - 1) * 10}` : ""}
+    `)
+    .then(dbRes => {res.status(200).send(dbRes[0])})
 })
 
 app.listen(process.env.PORT || 3001)
