@@ -189,4 +189,12 @@ app.get("/api/usergames/:id", (req, res) => {
     .then(dbRes => {res.status(200).send(dbRes[0])})
 })
 
+app.delete("/api/usergames/:userid", (req, res) => {
+    sequelize.query(`
+        DELETE FROM games 
+        WHERE user_uuid = '${req.params.userid}' AND id = ${req.query.gameid}
+    `)
+    .then(dbRes => {res.status(200).send()})
+})
+
 app.listen(process.env.PORT || 3001)

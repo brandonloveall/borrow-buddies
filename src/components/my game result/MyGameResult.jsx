@@ -13,9 +13,9 @@ function MyGameResult(props) {
 
     function handleRequest(){
         if(id === null || id === undefined || id === ""){dispatch(toggleLogin()); return}
-        if(gameStatus === "Posting Deleted!"){window.alert("Game has already been deleted"); return}
+        if(gameStatus === "Posting Deleted!"){window.alert("Game has already been deleted."); return}
 
-        axios.post(`http://localhost:3001/api/loadpostedgames/${id}`)
+        axios.delete(`http://localhost:3001/api/usergames/${id}?gameid=${props.id}`)
         .then(setGameStatus("Posting Deleted!"))
     }
 
