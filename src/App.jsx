@@ -16,8 +16,6 @@ import GameList from './components/game list/GameList.jsx';
 import axios from "axios"
 import MyGameList from "./components/my game list/MyGameList.jsx"
 
-//TODO: USE REDUX TO IMPLEMENT ACCOUNT LINK
-
 function App() {
   let [accountDropdown, setAccountDropdown] = useState("none")
   const dispatch = useDispatch()
@@ -27,6 +25,15 @@ function App() {
   const username = useSelector((state) => state.accountInfo.username)
   const [searchTerm, setSearchTerm] = useState("")
   const [alerts, setAlerts] = useState(0)
+
+  useEffect(() => {
+    if(id){
+      axios.get(`http://localhost:3001/api/alerts/${id}`)
+      .then(res => {
+        setAlerts(res.data[0].count)
+      })
+    }
+  }, [])
 
   return (
     <div className='App'>

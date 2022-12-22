@@ -161,13 +161,12 @@ app.get("/api/gamesearch", (req, res) => {
 app.post("/api/gamerequest", (req, res) => {
 
     sequelize.query(`
-    INSERT INTO game_requester_requestee (requester_id, requestee_id, game_id) 
-    SELECT '${req.query.requesterid}', '${req.query.ownerid}', '${req.query.gameid}'
+    INSERT INTO game_requester (requester_id, game_id) 
+    SELECT '${req.query.requesterid}', '${req.query.gameid}'
     WHERE
         NOT EXISTS (
-            SELECT id FROM game_requester_requestee 
+            SELECT id FROM game_requester 
             WHERE requester_id = '${req.query.requesterid}' 
-            AND requestee_id = '${req.query.ownerid}' 
             AND game_id = '${req.query.gameid}'
         )
     `)
@@ -195,6 +194,17 @@ app.delete("/api/usergames/:userid", (req, res) => {
         WHERE user_uuid = '${req.params.userid}' AND id = ${req.query.gameid}
     `)
     .then(dbRes => {res.status(200).send()})
+})
+
+app.get("/api/alerts/:id", (req, res) => {
+    sequelize.query(`
+        SELECT COUNT(game_id)
+        FROM game_requester
+        JOIN games ON game_id = games.id
+        JOIN users ON users.id = games.user_uuid
+        WHERE users.id = '${req.params.id}';
+    `)
+    .then(dbRes => {res.status(200).send(dbRes[0])})
 })
 
 app.listen(process.env.PORT || 3001)
